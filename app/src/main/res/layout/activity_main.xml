@@ -7,26 +7,52 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
+
     <EditText
-        android:hint="Enter a title"
         android:id="@+id/title"
-        android:inputType="none"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="Reminder title"
+        android:inputType="none"
+        android:textColorHint="#A1A1A1" />
 
     <EditText
-        android:hint="Select a date"
         android:id="@+id/date_input"
-        android:inputType="none"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="Select a date"
+        android:inputType="none"
+        android:textColorHint="#A1A1A1"
+        android:textColorLink="#3F51B5" />
 
 
     <EditText
-        android:hint="Select a time"
         android:id="@+id/time_input"
-        android:inputType="none"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:hint="Select a time"
+        android:inputType="none"
+        android:textColor="#000000"
+        android:textColorHighlight="#3F51B5"
+        android:textColorHint="#A1A1A1"
+        android:textColorLink="#36469C" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:shadowColor="#FFFFFF"
+        android:text=" Level of importance" />
+
+    <Spinner
+        android:id="@+id/importance_spinner"
+        android:layout_width="102dp"
+        android:layout_height="37dp" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Set Reminder" />
 
 </LinearLayout>
