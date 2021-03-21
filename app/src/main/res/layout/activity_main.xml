@@ -12,7 +12,7 @@
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Reminder title"
+        android:hint="Reminder title*"
         android:inputType="none"
         android:layout_marginBottom="20dp"
         android:textColorHint="#A1A1A1" />
@@ -21,7 +21,7 @@
         android:id="@+id/date_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Select a date"
+        android:hint="Select a date*"
         android:inputType="none"
         android:textColorHint="#A1A1A1"
         android:layout_marginBottom="20dp"
@@ -32,7 +32,7 @@
         android:id="@+id/time_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Select a time"
+        android:hint="Select a time*"
         android:inputType="none"
         android:textColor="#000000"
         android:textColorHighlight="#3F51B5"
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="4dp"
         android:shadowColor="#FFFFFF"
-        android:text=" Level of importance" />
+        android:text=" Level of importance*" />
 
     <Spinner
         android:id="@+id/importance_spinner"
