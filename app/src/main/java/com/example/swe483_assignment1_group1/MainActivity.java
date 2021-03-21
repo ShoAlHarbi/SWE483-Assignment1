@@ -93,14 +93,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onClick(View view) {
                 selectedTitle = title.getText().toString();
 
-                if (selectedTitle.equals("") || selectedDate == null || selectedTime == null){
+                if (selectedTitle.trim().equals("")|| selectedDate == null || selectedTime == null){
                     Toast.makeText(MainActivity.this, "All information is required", Toast.LENGTH_SHORT).show();
                  }
                 else{
 
                 Boolean isInserted = DB.insertReminderDetails(selectedTitle, selectedDate, selectedTime,selectedImportance);
-                if(isInserted==true)
+                if(isInserted==true) {
                     Toast.makeText(MainActivity.this, "New reminder Inserted", Toast.LENGTH_SHORT).show();
+                    time_in.setText("");
+                    date_in.setText("");
+                    title.setText("");
+                }
                 else
                     Toast.makeText(MainActivity.this, "Reminder not Inserted", Toast.LENGTH_SHORT).show();
             }  }      });
