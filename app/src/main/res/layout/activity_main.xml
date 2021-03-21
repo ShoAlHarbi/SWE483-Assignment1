@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:hint="Reminder title"
         android:inputType="none"
+        android:layout_marginBottom="20dp"
         android:textColorHint="#A1A1A1" />
 
     <EditText
@@ -23,6 +24,7 @@
         android:hint="Select a date"
         android:inputType="none"
         android:textColorHint="#A1A1A1"
+        android:layout_marginBottom="20dp"
         android:textColorLink="#3F51B5" />
 
 
@@ -35,24 +37,31 @@
         android:textColor="#000000"
         android:textColorHighlight="#3F51B5"
         android:textColorHint="#A1A1A1"
+        android:layout_marginBottom="20dp"
         android:textColorLink="#36469C" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         android:shadowColor="#FFFFFF"
         android:text=" Level of importance" />
 
     <Spinner
         android:id="@+id/importance_spinner"
-        android:layout_width="102dp"
+        android:layout_width="100dp"
+        android:layout_marginBottom="20dp"
         android:layout_height="37dp" />
 
     <Button
         android:id="@+id/setReminderButton"
-        android:layout_width="match_parent"
+        android:layout_width="192dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:backgroundTint="#3F51B5"
+        android:textColor="#FFFFFF"
+        android:layout_marginTop="38dp"
         android:text="Set Reminder" />
 
 
