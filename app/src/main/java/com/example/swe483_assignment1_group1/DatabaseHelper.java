@@ -51,7 +51,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public Cursor getRemindersCustomQuery (String query)
     {
-        //query example: Select * from ReminderDetails where title = 'hi'
+        //query parameter example:
+        //"Select * from ReminderDetails where reminderTitle = 'hi'"
         SQLiteDatabase DB = this.getWritableDatabase();
         Cursor cursor = DB.rawQuery(query, null);
 
