@@ -16,7 +16,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase DB) {
         //Still needs some fixing. Primary key not 100% done.
         //ALso check case user enters null inputs.
-        DB.execSQL("create Table ReminderDetails([reminderTitle TEXT, reminderDate TEXT, reminderTime TEXT, reminderImportance TEXT], PRIMARY KEY(reminderTitle,reminderDate,reminderTime,reminderImportance))");
+        DB.execSQL("create Table ReminderDetails(reminderTitle TEXT, reminderDate TEXT, reminderTime TEXT, reminderImportance TEXT)");
     }
 
     @Override
