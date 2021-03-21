@@ -93,16 +93,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void onClick(View view) {
                 selectedTitle = title.getText().toString();
 
+                if (selectedTitle.equals("") || selectedDate == null || selectedTime == null){
+                    Toast.makeText(MainActivity.this, "All information is required", Toast.LENGTH_SHORT).show();
+                 }
+                else{
+
                 Boolean isInserted = DB.insertReminderDetails(selectedTitle, selectedDate, selectedTime,selectedImportance);
                 if(isInserted==true)
                     Toast.makeText(MainActivity.this, "New reminder Inserted", Toast.LENGTH_SHORT).show();
                 else
                     Toast.makeText(MainActivity.this, "Reminder not Inserted", Toast.LENGTH_SHORT).show();
-            }        });
+            }  }      });
 
 
-
-        //-------------ONLY FOR TESTING:-------------------------------------------------------
+        //-------------ONLY FOR TESTING:Start-------------------------------------------------------
         viewButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -127,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 builder.show();
             }
         });
-            //-------------------------------------------------------------------------
+            //-------------------ONLY FOR TESTING: END--------------------------------------------
 
 
 

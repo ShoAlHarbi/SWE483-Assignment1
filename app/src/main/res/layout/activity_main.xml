@@ -69,6 +69,6 @@
         android:id="@+id/viewButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="View" />
+        android:text="[Testing only] View DB" />
 
 </LinearLayout>
