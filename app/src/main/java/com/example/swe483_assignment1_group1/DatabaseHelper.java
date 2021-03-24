@@ -9,12 +9,12 @@ import androidx.annotation.Nullable;
 public class DatabaseHelper extends SQLiteOpenHelper {
 
     public DatabaseHelper(Context context) {
-        super(context, "myRemindersDB.db", null, 1);
+        super(context, "G01RemindersDB.db", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase DB) {
-        DB.execSQL("create Table ReminderDetails(reminderTitle TEXT, reminderDate TEXT, reminderTime TEXT, reminderImportance TEXT)");
+        DB.execSQL("create Table ReminderDetails(reminderID INTEGER PRIMARY KEY autoincrement NOT NULL,reminderTitle TEXT NOT NULL, reminderDate TEXT NOT NULL, reminderTime TEXT NOT NULL, reminderImportance TEXT NOT NULL)");
     }
 
     @Override
