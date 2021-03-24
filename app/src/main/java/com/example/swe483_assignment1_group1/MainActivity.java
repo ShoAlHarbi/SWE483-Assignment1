@@ -27,11 +27,12 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
-//References:
+//References used:
 //1- https://codinginflow.com/tutorials/android/text-spinner
 //2- https://developer.android.com/guide/topics/ui/controls/spinner#java
 //3- https://www.allcodingtutorials.com/post/insert-delete-update-and-view-data-in-sqlite-database-android-studio
 //4- https://github.com/hackstarsj/AndroidDatetime_Picker_Dialog
+// 5 - https://stackoverflow.com/questions/9342249/how-to-insert-a-unique-id-into-each-sqlite-row/17674055
 
     EditText title;
     EditText date_in;
@@ -104,9 +105,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 Boolean isInserted = DB.insertReminderDetails(selectedTitle, selectedDate, selectedTime,selectedImportance);
                 if(isInserted==true) {
                     Toast.makeText(MainActivity.this, "New reminder Inserted", Toast.LENGTH_SHORT).show();
-                    time_in.setText("");
-                    date_in.setText("");
-                    title.setText("");
                 }
                 else
                     Toast.makeText(MainActivity.this, "Reminder not Inserted", Toast.LENGTH_SHORT).show();
