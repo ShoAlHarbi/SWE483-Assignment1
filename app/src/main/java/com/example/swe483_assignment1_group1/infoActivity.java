@@ -2,6 +2,7 @@ package com.example.swe483_assignment1_group1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -24,6 +25,14 @@ public class infoActivity extends AppCompatActivity {
         dateView = findViewById(R.id.DateTextView);
         timeView = findViewById(R.id.TimeTextView);
         importanceView = findViewById(R.id.ImportanceTextView);
+
+        Intent intent = getIntent();
+
+        title = intent.getStringExtra("reminderTitle");
+        date = intent.getStringExtra("reminderDate");
+        time = intent.getStringExtra("reminderTime");
+        importance = intent.getStringExtra("reminderImportance");
+
     }
 
 

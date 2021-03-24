@@ -3,8 +3,11 @@ package com.example.swe483_assignment1_group1;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.text.InputType;
@@ -194,6 +197,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
+
+    private void startAlarm(int year,int month,int day,int hourOfDay, int minute,int second){
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(year, month, day, hourOfDay, minute, second);
+
+        AlarmManager alarmManger = (AlarmManager) getSystemService(AlarmManager.class);
+        Intent alertReceiverIntent = new Intent(this, AlertReceiver.class);
+
+        int uniqueRequestCodeForEachIntent = 0;/* change it to primary key*/
+        PendingIntent alertReceiverPendingIntent = PendingIntent.getBroadcast(this,uniqueRequestCodeForEachIntent, alertReceiverIntent,0);
+        alarmManger.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), alertReceiverPendingIntent);
+    }
+
 
 
 }
