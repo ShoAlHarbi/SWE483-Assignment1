@@ -34,12 +34,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //4- https://github.com/hackstarsj/AndroidDatetime_Picker_Dialog
 // 5 - https://stackoverflow.com/questions/9342249/how-to-insert-a-unique-id-into-each-sqlite-row/17674055
 
-    EditText title;
-    EditText date_in;
-    EditText time_in;
+    EditText reminderTitle;//to enter the reminder's title
+    EditText reminderDate;//to enter the reminder's date
+    EditText reminderTime;//to enter the reminder's time
+    Spinner importance_spinner;//to display reminder's importance
     DatabaseHelper DB;
     Button setReminderButton;
-    Spinner importance_spinner;
     String selectedTitle;
     String selectedImportance;
     String selectedDate;
@@ -54,13 +54,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        date_in=findViewById(R.id.date_input);
-        time_in=findViewById(R.id.time_input);
-        setReminderButton = findViewById(R.id.setReminderButton);
-        title =  findViewById(R.id.title);
 
-        date_in.setInputType(InputType.TYPE_NULL);
-        time_in.setInputType(InputType.TYPE_NULL);
+        reminderDate= findViewById(R.id.date);
+        reminderTime= findViewById(R.id.time);
+        setReminderButton = findViewById(R.id.setReminderButton);
+        reminderTitle = findViewById(R.id.title);
+
+        reminderDate.setInputType(InputType.TYPE_NULL);
+        reminderTime.setInputType(InputType.TYPE_NULL);
 
         DB = new DatabaseHelper(this);
 
@@ -70,23 +71,23 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         importance_spinner  = (Spinner) findViewById(R.id.importance_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.imprtance_array, android.R.layout.simple_spinner_item);
+                R.array.imprtance_array, android.R.layout.simple_spinner_item); //importance_array consists of two items: High and Low
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         importance_spinner.setAdapter(adapter);
 
         importance_spinner.setOnItemSelectedListener(this);
 
-        date_in.setOnClickListener(new View.OnClickListener() {
+        reminderDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDateDialog(date_in);
+                showDateDialog(reminderDate);//to allow the user to select the reminder date
             }
         });
 
-        time_in.setOnClickListener(new View.OnClickListener() {
+        reminderTime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showTimeDialog(time_in);
+                showTimeDialog(reminderTime);//to allow the user to select the reminder time
             }
         });
 
@@ -95,13 +96,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
          setReminderButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                selectedTitle = title.getText().toString();
-
+                selectedTitle = reminderTitle.getText().toString();
+                //input fields validation to make sure nothing is empty
                 if (selectedTitle.trim().equals("")|| selectedDate == null || selectedTime == null){
                     Toast.makeText(MainActivity.this, "All information is required", Toast.LENGTH_SHORT).show();
                  }
                 else{
-
                 Boolean isInserted = DB.insertReminderDetails(selectedTitle, selectedDate, selectedTime,selectedImportance);
                 if(isInserted==true) {
                     Toast.makeText(MainActivity.this, "New reminder Inserted", Toast.LENGTH_SHORT).show();
@@ -144,44 +144,44 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-    private void showTimeDialog(final EditText time_in) {
-        final Calendar calendar=Calendar.getInstance();
+    private void showTimeDialog(final EditText reminderTime) {
+        final Calendar reminderClock = Calendar.getInstance();
 
-        TimePickerDialog.OnTimeSetListener timeSetListener=new TimePickerDialog.OnTimeSetListener() {
+        TimePickerDialog.OnTimeSetListener timeSetListener = new TimePickerDialog.OnTimeSetListener() {
             @Override
-            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                calendar.set(Calendar.HOUR_OF_DAY,hourOfDay);
-                calendar.set(Calendar.MINUTE,minute);
+            public void onTimeSet(TimePicker view, int hour, int minute) {
+                reminderClock.set(Calendar.HOUR_OF_DAY,hour);
+                reminderClock.set(Calendar.MINUTE,minute);
                 SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm");
-                time_in.setText(simpleDateFormat.format(calendar.getTime()));
+                reminderTime.setText(simpleDateFormat.format(reminderClock.getTime()));
 
-                selectedTime = time_in.getText().toString();
+                selectedTime = reminderTime.getText().toString();
                 Toast.makeText(MainActivity.this, selectedTime, Toast.LENGTH_SHORT).show();
 
             }
         };
 
-        new TimePickerDialog(MainActivity.this,timeSetListener,calendar.get(Calendar.HOUR_OF_DAY),calendar.get(Calendar.MINUTE),false).show();
+        new TimePickerDialog(MainActivity.this,timeSetListener,reminderClock.get(Calendar.HOUR_OF_DAY),reminderClock.get(Calendar.MINUTE),false).show();
     }
 
-    private void showDateDialog(final EditText date_in) {
-        final Calendar calendar=Calendar.getInstance();
+    private void showDateDialog(final EditText reminderDate) {
+        final Calendar reminderCalendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener dateSetListener=new DatePickerDialog.OnDateSetListener() {
             @Override
-            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                calendar.set(Calendar.YEAR,year);
-                calendar.set(Calendar.MONTH,month);
-                calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                reminderCalendar.set(Calendar.YEAR,year);
+                reminderCalendar.set(Calendar.MONTH,month);
+                reminderCalendar.set(Calendar.DAY_OF_MONTH,day);
                 SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yy-MM-dd");
-                date_in.setText(simpleDateFormat.format(calendar.getTime()));
+                reminderDate.setText(simpleDateFormat.format(reminderCalendar.getTime()));
 
-                selectedDate = date_in.getText().toString();
+                selectedDate = reminderDate.getText().toString();
                 Toast.makeText(MainActivity.this, selectedDate, Toast.LENGTH_SHORT).show();
 
             }
         };
 
-        new DatePickerDialog(MainActivity.this,dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
+        new DatePickerDialog(MainActivity.this,dateSetListener,reminderCalendar.get(Calendar.YEAR),reminderCalendar.get(Calendar.MONTH),reminderCalendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
 

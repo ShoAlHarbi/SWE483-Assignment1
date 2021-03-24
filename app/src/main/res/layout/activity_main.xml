@@ -18,7 +18,7 @@
         android:textColorHint="#A1A1A1" />
 
     <EditText
-        android:id="@+id/date_input"
+        android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Select a date*"
@@ -29,7 +29,7 @@
 
 
     <EditText
-        android:id="@+id/time_input"
+        android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Select a time*"
