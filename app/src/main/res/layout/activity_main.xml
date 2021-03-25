@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:orientation="vertical"
     android:layout_height="match_parent"
+    android:backgroundTint="#FFFFFF"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <EditText
         android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
         android:hint="Reminder title*"
         android:inputType="none"
-        android:layout_marginBottom="20dp"
         android:textColorHint="#A1A1A1" />
 
     <EditText
         android:id="@+id/date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:drawableLeft="@drawable/calendar_icon"
         android:hint="Select a date*"
         android:inputType="none"
         android:textColorHint="#A1A1A1"
-        android:layout_marginBottom="20dp"
         android:textColorLink="#3F51B5" />
 
 
@@ -32,37 +34,42 @@
         android:id="@+id/time"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:drawableLeft="@drawable/clock_icon"
         android:hint="Select a time*"
         android:inputType="none"
         android:textColor="#000000"
         android:textColorHighlight="#3F51B5"
         android:textColorHint="#A1A1A1"
-        android:layout_marginBottom="20dp"
         android:textColorLink="#36469C" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="3dp"
         android:layout_marginBottom="4dp"
+        android:drawableLeft="@drawable/important_icon"
         android:shadowColor="#FFFFFF"
-        android:text=" Level of importance*" />
+        android:text=" Level of importance*"
+        android:textSize="17dp" />
 
     <Spinner
         android:id="@+id/importance_spinner"
         android:layout_width="100dp"
-        android:layout_marginBottom="20dp"
-        android:layout_height="37dp" />
+        android:layout_height="37dp"
+        android:layout_marginLeft="3dp"
+        android:layout_marginBottom="20dp" />
 
     <Button
         android:id="@+id/setReminderButton"
         android:layout_width="192dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
-        android:backgroundTint="#3F51B5"
-        android:textColor="#FFFFFF"
         android:layout_marginTop="38dp"
-        android:text="Set Reminder" />
+        android:backgroundTint="#3F51B5"
+        android:text="Set Reminder"
+        android:textColor="#FFFFFF" />
 
 
     <Button
