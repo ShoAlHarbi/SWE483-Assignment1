@@ -34,7 +34,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //3- https://www.allcodingtutorials.com/post/insert-delete-update-and-view-data-in-sqlite-database-android-studio
 //4- https://github.com/hackstarsj/AndroidDatetime_Picker_Dialog
 // 5 - https://stackoverflow.com/questions/9342249/how-to-insert-a-unique-id-into-each-sqlite-row/17674055
-
+// 6 - https://developer.android.com/training/notify-user/navigation
+    
     EditText reminderTitle;//to enter the reminder's title
     EditText reminderDate;//to enter the reminder's date
     EditText reminderTime;//to enter the reminder's time
