@@ -27,7 +27,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
-
+    // SWE 483 - Assignment 1 - Group 1 - Section 60116
+    //by:
+    // Shahad AlHarbi (Leader), Nuha AlDawsari, Hanin AlMohaimeed, Lama AlMayouf and Rahaf AlOmar.
+    
 //References used:
 //1- “Text Spinner,” Coding in Flow, 27-Jun-2020. [Online]. Available: https://codinginflow.com/tutorials/android/text-spinner. [Accessed: 25-Mar-2021].
 //2- “Spinners &nbsp;: &nbsp; Android Developers,” Android Developers. [Online]. Available: https://developer.android.com/guide/topics/ui/controls/spinner#java. [Accessed: 25-Mar-2021].
