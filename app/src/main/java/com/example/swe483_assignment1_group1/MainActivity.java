@@ -29,12 +29,12 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
 //References used:
-//1- https://codinginflow.com/tutorials/android/text-spinner
-//2- https://developer.android.com/guide/topics/ui/controls/spinner#java
-//3- https://www.allcodingtutorials.com/post/insert-delete-update-and-view-data-in-sqlite-database-android-studio
-//4- https://github.com/hackstarsj/AndroidDatetime_Picker_Dialog
-// 5 - https://stackoverflow.com/questions/9342249/how-to-insert-a-unique-id-into-each-sqlite-row/17674055
-// 6 - https://developer.android.com/training/notify-user/navigation
+//1- “Text Spinner,” Coding in Flow, 27-Jun-2020. [Online]. Available: https://codinginflow.com/tutorials/android/text-spinner. [Accessed: 25-Mar-2021].
+//2- “Spinners &nbsp;: &nbsp; Android Developers,” Android Developers. [Online]. Available: https://developer.android.com/guide/topics/ui/controls/spinner#java. [Accessed: 25-Mar-2021].
+//3- L. Android, “Insert, Delete, Update and View Data in SQLite Database Android Studio,” All Coding Tutorials, 01-Jul-2020. [Online]. Available: https://www.allcodingtutorials.com/post/insert-delete-update-and-view-data-in-sqlite-database-android-studio. [Accessed: 25-Mar-2021].
+//4-  Hackstarsj, “hackstarsj/AndroidDatetime_Picker_Dialog,” GitHub. [Online]. Available: https://github.com/hackstarsj/AndroidDatetime_Picker_Dialog. [Accessed: 25-Mar-2021].
+//5 - sevenssevens 2, AndomarAndomar 215k4141 gold badges344344 silver badges374374 bronze badges, WimWim 99866 silver badges99 bronze badges, greutgreut 4, netalexnetalex 38133 silver badges1313 bronze badges, and oriolowonancyoriolowonancy 24322 silver badges99 bronze badges, “How to insert a unique ID into each SQLite row?,” Stack Overflow, 01-Dec-1960. [Online]. Available: https://stackoverflow.com/questions/9342249/how-to-insert-a-unique-id-into-each-sqlite-row/17674055. [Accessed: 25-Mar-2021].
+//6 - “Start an Activity from a Notification &nbsp;: &nbsp; Android Developers,” Android Developers. [Online]. Available: https://developer.android.com/training/notify-user/navigation. [Accessed: 25-Mar-2021].
     
     EditText reminderTitle;//to enter the reminder's title
     EditText reminderDate;//to enter the reminder's date
@@ -69,10 +69,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         reminderTime.setInputType(InputType.TYPE_NULL);
 
         DB = new DatabaseHelper(this);
-
-        //----------ONLY FOR TESTING:--------------
-        viewButton=findViewById(R.id.viewButton);
-        //----------------------------------------
 
         importance_spinner  = (Spinner) findViewById(R.id.importance_spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
@@ -120,33 +116,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
          });
 
 
-        //-------------ONLY FOR TESTING:Start-------------------------------------------------------
-        viewButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Cursor res = DB.getAllReminders();
-                if(res.getCount()==0){
-                    Toast.makeText(MainActivity.this, "No Entry Exists", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-                StringBuffer buffer = new StringBuffer();
-                while(res.moveToNext()){
-                    buffer.append("ID :"+res.getString(0)+"\n");
-                    buffer.append("Title :"+res.getString(1)+"\n");
-                    buffer.append("Date :"+res.getString(2)+"\n");
-                    buffer.append("Time :"+res.getString(3)+"\n");
-                    buffer.append("Importance :"+res.getString(4)+"\n\n");
-
-                }
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setCancelable(true);
-                builder.setTitle("User Entries");
-                builder.setMessage(buffer.toString());
-                builder.show();
-            }
-        });
-            //-------------------ONLY FOR TESTING: END--------------------------------------------
 
 
 

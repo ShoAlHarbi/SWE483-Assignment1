@@ -71,11 +71,4 @@
         android:text="Set Reminder"
         android:textColor="#FFFFFF" />
 
-
-    <Button
-        android:id="@+id/viewButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="[Testing only] View DB" />
-
 </LinearLayout>
