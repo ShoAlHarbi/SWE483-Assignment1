@@ -34,9 +34,8 @@ public class AlertReceiver extends BroadcastReceiver {
 
         builder.setContentIntent(getDetailsActivityPendingIntent(context, reminder));
         builder.setContentTitle(reminder.reminderTitle) ;
-        builder.setSmallIcon(R.drawable. ic_launcher_foreground ) ;
+        builder.setSmallIcon(R.drawable.ic_baseline_notifications_active_24) ;
         builder.setAutoCancel(true) ;
-//        builder.setChannelId("") ;
         return builder.build() ;
     }
 
