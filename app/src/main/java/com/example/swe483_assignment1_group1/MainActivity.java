@@ -211,7 +211,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         AlarmManager alarmManger = (AlarmManager) getSystemService(AlarmManager.class);
         Intent alertReceiverIntent = new Intent(this, AlertReceiver.class);
-        alertReceiverIntent.putExtra("reminderID", reminderID);
+        alertReceiverIntent.putExtra("reminderID", reminderID+"");
 
         PendingIntent alertReceiverPendingIntent = PendingIntent.getBroadcast(this,(int)reminderID, alertReceiverIntent,0);
         alarmManger.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), alertReceiverPendingIntent);

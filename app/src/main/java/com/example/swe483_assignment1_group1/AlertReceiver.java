@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 
+
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
@@ -14,13 +15,13 @@ public class AlertReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         //called when alarm is fired, show notification
-        String reminderID = intent.getStringExtra("reminderID");
+        int reminderID = Integer.parseInt((String) intent.getExtras().get("reminderID"));
         Reminder reminder = retrieveReminderDetails(reminderID, context);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         Notification notification = getNotification(reminder,context);
         //edit id here
-        notificationManager.notify(11, notification);
+        notificationManager.notify(reminderID, notification);
 
     }
 
@@ -57,22 +58,22 @@ public class AlertReceiver extends BroadcastReceiver {
         );
     }
 
-    private Reminder retrieveReminderDetails(String reminderID, Context context){
+    private Reminder retrieveReminderDetails(long reminderID, Context context){
         DatabaseHelper databaseHelper = new DatabaseHelper(context);
-        String query = "Select * from ReminderDetails where reminderID = '" + reminderID + "'";
+        String query = "SELECT  * FROM " + "ReminderDetails" + " WHERE "
+                + "reminderID" + " = " + reminderID;
+
         Cursor cursor = databaseHelper.getRemindersCustomQuery(query);
 
-        int reminderTitleIndex = cursor.getColumnIndex("reminderTitle");
-        int reminderDateIndex = cursor.getColumnIndex("reminderDate");
-        int reminderTimeIndex = cursor.getColumnIndex("reminderTime");
-        int reminderImportanceIndex = cursor.getColumnIndex("reminderImportance");
+        if (cursor.moveToFirst()){
+            String reminderTitle = cursor.getString(1);
+            String reminderDate = cursor.getString(2);
+            String reminderTime = cursor.getString(3);
+            String reminderImportance = cursor.getString(4);
+            return new Reminder(reminderTitle, reminderDate, reminderTime, reminderImportance);
+        }
 
-        String reminderTitle = cursor.getString(reminderTitleIndex);
-        String reminderDate = cursor.getString(reminderDateIndex);
-        String reminderTime = cursor.getString(reminderTimeIndex);
-        String reminderImportance = cursor.getString(reminderImportanceIndex);
-
-        return new Reminder(reminderTitle, reminderDate, reminderTime, reminderImportance);
+        return null;
     }
 
 }
