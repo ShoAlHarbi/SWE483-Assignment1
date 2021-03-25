@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">My Reminders</string>
     <string name="Title">ReminderTitle</string>
+    <string name="reminderButton">Add Reminder</string>
     <string-array name="imprtance_array">
         <item>High</item>
         <item>Low</item>

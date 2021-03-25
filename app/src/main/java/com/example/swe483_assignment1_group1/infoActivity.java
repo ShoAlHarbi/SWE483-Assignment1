@@ -5,9 +5,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
-public class infoActivity extends AppCompatActivity {
+public class infoActivity extends AppCompatActivity implements View.OnClickListener {
 
     String title;
     String date;
@@ -17,6 +18,7 @@ public class infoActivity extends AppCompatActivity {
     TextView dateView;
     TextView timeView;
     TextView importanceView;
+    Button button;
 
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
@@ -25,6 +27,8 @@ public class infoActivity extends AppCompatActivity {
         dateView = findViewById(R.id.DateTextView);
         timeView = findViewById(R.id.TimeTextView);
         importanceView = findViewById(R.id.ImportanceTextView);
+        button = findViewById(R.id.addReminderButton);
+        button.setOnClickListener(this);
 
         Intent intent = getIntent();
 
@@ -41,4 +45,11 @@ public class infoActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onClick(View v) {
+        if(v.getId() == R.id.addReminderButton){
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        }
+    }
 }
