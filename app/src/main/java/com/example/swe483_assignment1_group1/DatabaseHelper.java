@@ -23,7 +23,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         DB.execSQL("drop Table if exists ReminderDetails");
     }
 
-    public Boolean insertReminderDetails(String title, String date,String time,String importance)
+    public long insertReminderDetails(String title, String date,String time,String importance)
     {
         SQLiteDatabase DB = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -32,12 +32,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put("reminderTime", time);
         contentValues.put("reminderImportance", importance);
 
-        long result=DB.insert("ReminderDetails", null, contentValues);
-        if(result==-1){
-            return false;
-        }else{
-            return true;
-        }
+        long key =DB.insert("ReminderDetails", null, contentValues);
+        return key;
     }
 
     public Cursor getAllReminders ()

@@ -22,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.sql.Time;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -44,6 +45,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     String selectedImportance;
     String selectedDate;
     String selectedTime;
+
+    Date date;
+    ReminderTime time;
 
     //------------ONLY FOR TESTING:--------------
     Button viewButton;
@@ -102,13 +106,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     Toast.makeText(MainActivity.this, "All information is required", Toast.LENGTH_SHORT).show();
                  }
                 else{
-                Boolean isInserted = DB.insertReminderDetails(selectedTitle, selectedDate, selectedTime,selectedImportance);
-                if(isInserted==true) {
+                long reminderID = DB.insertReminderDetails(selectedTitle, selectedDate, selectedTime,selectedImportance);
+                if(reminderID == -1) {
+                    Toast.makeText(MainActivity.this, "Reminder not Inserted", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    scheduleAlarm(reminderID);
                     Toast.makeText(MainActivity.this, "New reminder Inserted", Toast.LENGTH_SHORT).show();
                 }
-                else
-                    Toast.makeText(MainActivity.this, "Reminder not Inserted", Toast.LENGTH_SHORT).show();
-            }  }      });
+            }
+            }
+         });
 
 
         //-------------ONLY FOR TESTING:Start-------------------------------------------------------
@@ -154,7 +162,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 reminderClock.set(Calendar.MINUTE,minute);
                 SimpleDateFormat simpleDateFormat=new SimpleDateFormat("HH:mm");
                 reminderTime.setText(simpleDateFormat.format(reminderClock.getTime()));
-
+                time = new ReminderTime(hour, minute, 0);
                 selectedTime = reminderTime.getText().toString();
                 Toast.makeText(MainActivity.this, selectedTime, Toast.LENGTH_SHORT).show();
 
@@ -172,12 +180,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 reminderCalendar.set(Calendar.YEAR,year);
                 reminderCalendar.set(Calendar.MONTH,month);
                 reminderCalendar.set(Calendar.DAY_OF_MONTH,day);
+                date = new Date(year, month, day);
                 SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yy-MM-dd");
                 reminderDate.setText(simpleDateFormat.format(reminderCalendar.getTime()));
-
                 selectedDate = reminderDate.getText().toString();
                 Toast.makeText(MainActivity.this, selectedDate, Toast.LENGTH_SHORT).show();
-
             }
         };
 
@@ -197,16 +204,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     }
 
-    private void startAlarm(int year,int month,int day,int hourOfDay, int minute,int second){
+    private void scheduleAlarm(long reminderID){
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
-        calendar.set(year, month, day, hourOfDay, minute, second);
+        calendar.set(date.year, date.month, date.day, time.hour, time.minute, time.second);
 
         AlarmManager alarmManger = (AlarmManager) getSystemService(AlarmManager.class);
         Intent alertReceiverIntent = new Intent(this, AlertReceiver.class);
+        alertReceiverIntent.putExtra("reminderID", reminderID);
 
-        int uniqueRequestCodeForEachIntent = 0;/* change it to primary key*/
-        PendingIntent alertReceiverPendingIntent = PendingIntent.getBroadcast(this,uniqueRequestCodeForEachIntent, alertReceiverIntent,0);
+        PendingIntent alertReceiverPendingIntent = PendingIntent.getBroadcast(this,(int)reminderID, alertReceiverIntent,0);
         alarmManger.setExact(AlarmManager.RTC_WAKEUP,calendar.getTimeInMillis(), alertReceiverPendingIntent);
     }
 

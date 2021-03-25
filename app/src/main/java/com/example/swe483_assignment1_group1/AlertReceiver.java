@@ -14,8 +14,8 @@ public class AlertReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         //called when alarm is fired, show notification
-        String primaryKey = intent.getStringExtra("");
-        Reminder reminder = retrieveReminderDetails(primaryKey, context);
+        String reminderID = intent.getStringExtra("reminderID");
+        Reminder reminder = retrieveReminderDetails(reminderID, context);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         Notification notification = getNotification(reminder,context);
@@ -26,14 +26,13 @@ public class AlertReceiver extends BroadcastReceiver {
 
     private Notification getNotification (Reminder reminder, Context context) {
         NotificationCompat.Builder builder;
-        if (reminder.reminderImportance == "high")
+        if (reminder.reminderImportance.equalsIgnoreCase("high"))
             builder = new NotificationCompat.Builder(context, "HighImportanceChannel");
         else
             builder = new NotificationCompat.Builder(context, "LowImportanceChannel");
 
         builder.setContentIntent(getDetailsActivityPendingIntent(context, reminder));
         builder.setContentTitle(reminder.reminderTitle) ;
-        //builder.setContentText(content) ;
         builder.setSmallIcon(R.drawable. ic_launcher_foreground ) ;
         builder.setAutoCancel(true) ;
 //        builder.setChannelId("") ;
@@ -58,9 +57,9 @@ public class AlertReceiver extends BroadcastReceiver {
         );
     }
 
-    private Reminder retrieveReminderDetails(String primaryKey, Context context){
+    private Reminder retrieveReminderDetails(String reminderID, Context context){
         DatabaseHelper databaseHelper = new DatabaseHelper(context);
-        String query = "Select * from ReminderDetails where reminderTitle = '" + primaryKey + "'";
+        String query = "Select * from ReminderDetails where reminderID = '" + reminderID + "'";
         Cursor cursor = databaseHelper.getRemindersCustomQuery(query);
 
         int reminderTitleIndex = cursor.getColumnIndex("reminderTitle");
