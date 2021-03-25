@@ -33,6 +33,11 @@ public class infoActivity extends AppCompatActivity {
         time = intent.getStringExtra("reminderTime");
         importance = intent.getStringExtra("reminderImportance");
 
+        titleView.setText(title);
+        dateView.setText(date);
+        timeView.setText(time);
+        importanceView.setText(importance);
+
     }
 
 
